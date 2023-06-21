@@ -18,7 +18,9 @@ Seu papel é construir uma RESTful API que permita:
 -   Emitir extrato bancário
 -   Excluir uma conta bancária
 
-## Collections para importar no insomnia [link](https://drive.google.com/file/d/1unXY_xAgUNM5VUcltTs9JqHlpHTnfJGa/view?usp=drive_link)
+## Collections para importar no insomnia 
+
+- [link](https://drive.google.com/file/d/1unXY_xAgUNM5VUcltTs9JqHlpHTnfJGa/view?usp=drive_link)
 
 ## Requisitos obrigatórios
 
