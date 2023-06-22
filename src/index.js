@@ -1,6 +1,7 @@
-const app = require('./servidor');
+const express = require('express');
 const routes = require('./routes');
+const server = require('./servidor');
 
-app.use(routes);
+server.use('/contas', routes);
 
-app.listen(3000);
+

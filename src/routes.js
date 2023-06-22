@@ -1,9 +1,7 @@
 const express = require('express');
-const routes = express();
-const dataBank = require('./bancodedados');
-const users = require('./controllers/users');
+const router = express.Router();
+const accountController = require('./controllers/acountController');
 
+router.get('/contas?senha_banco', accountController.listAccounts);
 
-routes.
-
-    module.export = routes;
+module.exports = router;
