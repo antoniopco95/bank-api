@@ -27,23 +27,12 @@ exports.acountUpdates = (req, res) => {
     }
 
 
-    if (nome) {
-        acountNumberExist.usuario.nome = nome;
-    }
-    if (cpf) {
-        acountNumberExist.usuario.cpf = cpf;
-    }
-    if (dataNascimento) {
-        acountNumberExist.usuario.data_nascimento = dataNascimento;
-    }
-    if (telefone) {
-        acountNumberExist.usuario.telefone = telefone;
-    }
-    if (email) {
-        acountNumberExist.usuario.email = email;
-    }
-    if (senha) {
-        acountNumberExist.usuario.senha = senha;
+    const fieldsToUpdate = { nome, cpf, data_nascimento: dataNascimento, telefone, email, senha };
+
+    for (const field in fieldsToUpdate) {
+        if (fieldsToUpdate[field]) {
+            acountNumberExist.usuario[field] = fieldsToUpdate[field];
+        }
     }
 
     res.status(200).json({ mensagem: 'Conta atualizada com sucesso!' });

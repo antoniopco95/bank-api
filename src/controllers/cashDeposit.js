@@ -17,15 +17,16 @@ exports.depositAmount = (req, res) => {
         return res.status(400).json({ error: 'O valor depositado deve ser maior que zero' })
     }
 
-    acount.saldo += valor;
+    acount.saldo += valor * 100;
 
     const depositTransaction = {
         numero,
         valor,
-        data: new Date().toISOString()
+        data: new Date().toLocaleString('pt-BR', { timeZone: 'UTC' }).replace(',', '')
     };
 
     dataBank.depositos.push(depositTransaction);
 
     res.status(200).json({ message: 'Depósito relizado com sucesso' });
+
 };
