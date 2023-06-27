@@ -5,12 +5,14 @@ const creatAcount = require('./controllers/createAcount');
 const acountUpdate = require('./controllers/acountUpdate');
 const acountDelete = require('./controllers/acountDelete');
 const cashDeposit = require('./controllers/cashDeposit');
+const withdrawMoney = require('./controllers/withdrawMoney');
 
 router.get('/contas', acountController.listAcounts);
 router.post('/contas', creatAcount.createAcounts);
 router.put(`/contas/:numero/usuario`, acountUpdate.acountUpdates);
 router.delete('/contas/:numero', acountDelete.deleteAcount);
 router.post('/transacoes/depositar', cashDeposit.depositAmount);
+router.post('/transacoes/sacar', withdrawMoney.withdrawTransaction);
 
 
 module.exports = router;

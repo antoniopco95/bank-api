@@ -1,21 +1,15 @@
 const dataBank = require('../bancodedados');
 
-exports.depositAmount = (req, res) => {
+function depositAmount(req, res) {
     const { numero, valor } = req.body;
 
-    if (!numero || !valor) {
-        return res.status(400).json({ error: 'O numero da conta e o valor do deposito são obrigatorios para prosseguir' });
+    const validationResult = transactionValidation(numero, valor);
+
+    if (validationResult.error) {
+        return res.status(400).json({ error: validationResult.error });
     }
 
-    const acount = dataBank.contas.find((conta) => conta.numero === numero);
-
-    if (!acount) {
-        return res.status(400).json({ error: 'Conta inexistente' })
-    }
-
-    if (valor <= 0) {
-        return res.status(400).json({ error: 'O valor depositado deve ser maior que zero' })
-    }
+    const acount = validationResult.acount;
 
     acount.saldo += valor * 100;
 
@@ -27,6 +21,30 @@ exports.depositAmount = (req, res) => {
 
     dataBank.depositos.push(depositTransaction);
 
-    res.status(200).json({ message: 'Depósito relizado com sucesso' });
+    res.status(200).json({ message: 'Depósito realizado com sucesso' });
 
+};
+
+function transactionValidation(number, value) {
+
+    if (!number || !value) {
+        return { error: 'O número da conta e o valor da transação são obrigatórios para prosseguir' };
+    }
+
+    const acount = dataBank.contas.find((conta) => conta.numero === number);
+
+    if (!acount) {
+        return { error: 'Conta inexistente' };
+    }
+
+    if (value <= 0) {
+        return { error: 'O valor da transação deve ser maior que zero' };
+    }
+
+    return { acount };
+}
+
+module.exports = {
+    depositAmount,
+    transactionValidation
 };
