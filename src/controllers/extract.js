@@ -23,11 +23,18 @@ exports.extract = (req, res) => {
     });
   }
 
-  res
-    .status(200)
-    .json({
-      depositos: dataBank.depositos,
-      saques: dataBank.saques,
-      transferencias: dataBank.transferencias,
-    });
+  const sentTransfer = dataBank.transferencias.filter((item) => {
+    return item.numero_conta_destino === numero_conta;
+  });
+
+  const receivedTransfer = dataBank.transferencias.filter((item) => {
+    return item.numero_conta_origem === numero_conta;
+  });
+
+  res.status(200).json({
+    depositos: dataBank.depositos,
+    saques: dataBank.saques,
+    transferenciasEnviadas: sentTransfer,
+    transferenciasRecebidas: receivedTransfer,
+  });
 };
